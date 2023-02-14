@@ -5,12 +5,14 @@ function Button({
   children,
   color = 'default',
   size = 'base',
-  backgroundColor
+  backgroundColor,
+  handleClick
 }) {
   return (
     <button
       className={`${color} ${size}`}
       style={backgroundColor && {backgroundColor}}
+      onClick={handleClick}
     >
       {children}
     </button>
@@ -24,5 +26,6 @@ export default Button;
 //argsTypeを使う場合は不要
 // Button.propTypes = {
 //   color: PropTypes.oneOf(['primary', 'default', 'danger']),
-//   size : PropTypes.oneOf(['sm', 'base','lg'])
+//   size : PropTypes.oneOf(['sm', 'base','lg']),
+//   onClick: PropTypes.func.isRequired,
 // };

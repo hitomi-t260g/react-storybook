@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import Button from '../Button/Button';
 
 export default {
@@ -14,11 +15,21 @@ export default {
     },
     backgroundColor: {
       control:{type:'color'}
-    }
+    },
+    handleClick: {
+      action:`true`,
+    },
   },
 };
 
-const Template = (args) => <Button {...args} />;  //ここの...argsとbindの流れがわからない
+const something = action('something')
+
+const Template = (args) => {
+const handleClick = () => {
+something();
+};
+return <Button {...args} handleClick={handleClick} />;
+};  //ここの...argsとbindの流れがわからない
 export const Default =  Template.bind({});
 Default.args =  {
   children: 'Default',
