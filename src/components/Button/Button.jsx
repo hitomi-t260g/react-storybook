@@ -12,24 +12,26 @@ function Button({
   color = 'default',
   size = 'base',
   backgroundColor,
+  handleClick
 }) {
   const [message, setMessage] = useState('');
 
-  const handleClick = () => {
+  const handleClick2 = () => {
     setMessage('clicked');
+    handleClick();
   };
 
   return (
     <button
       className={`${color} ${size}`}
       style={backgroundColor && {backgroundColor}}
-      onClick={handleClick}
+      onClick={handleClick2}
     >
-      {children}{message}
+      {children}
+      {message}
     </button>
   );
 }
-
 
 export default Button;
 

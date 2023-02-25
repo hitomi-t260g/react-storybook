@@ -8,7 +8,7 @@ import Button from '../Button/Button';
 export default {
   title: 'Common/Button',
   component: Button,
-  //decoratorにより、storyの外側要素を指定できるテンプレとかに使えそう
+  //decoratorにより、storyの外側要素を指定できる.テンプレとかに使えそう
   // decorators: [
   //   (Story) => (
   //     <div
@@ -60,15 +60,15 @@ export default {
   },
 };
 
-const something = action('something')
+// const something = action('something')
 
 const Template = (args) => {
-const handleClick = (e) => {
-something(e);
-};
+// const handleClick = (e) => {
+// something(e);
+// };
 //別のstoryにリンクさせたい場合は、linkToのアドオンを用いる
 // return <Button {...args} handleClick={linkTo('Common/Button', 'Danger')} />;
-return <Button {...args} handleClick={handleClick} />;
+return <Button {...args} />;
 };
 
 
@@ -104,14 +104,13 @@ PrimaryLarge.args = {
   size: 'lg',
 }
 
+// clickがinteractionに表示されない件。interactionの設定をみてみよう
 PrimaryLarge.play = async ({ args, canvasElement }) => {
-  console.log(args);
-  console.log(canvasElement);
   const canvas = within(canvasElement);
-  await waitFor(() => userEvent.click(canvas.getByRole('button')));
-  await waitFor(()=> expect(canvas.getByRole('button')).toHaveTextContent('Largeclicked'));
+  expect(canvas.getByRole('button')).toHaveTextContent('Large');
+  userEvent.click(await canvas.getByRole('button'));
+  expect(args.handleClick).toHaveBeenCalled();
+  expect(canvas.getByRole('button')).toHaveTextContent('Largeclicked');
 
 };
-
-
 
